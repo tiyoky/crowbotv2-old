@@ -8,8 +8,9 @@
   "author": "Wass",
   "license": "ISC",
 "engines": {
-  "node": "12.x.x"
+  "node": "14.x.x"
 },
+
   "dependencies": {
     "@discordjs/opus": "^0.7.0",
     "axios": "^0.24.0",
