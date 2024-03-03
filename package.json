@@ -7,6 +7,9 @@
   },
   "author": "Wass",
   "license": "ISC",
+  "engines": {
+    "node": "14.x.x"
+  },
   "dependencies": {
     "@discordjs/opus": "^0.7.0",
     "axios": "^0.24.0",
@@ -17,6 +20,7 @@
     "discord-buttons": "^4.0.0",
     "discord-logs": "^2.0.1",
     "discord.js": "^12.5.3",
+    "discord.js.old": "^11.6.5",
     "ffmpeg": "0.0.4",
     "ffmpeg-static": "^4.4.0",
     "fs": "0.0.1-security",
