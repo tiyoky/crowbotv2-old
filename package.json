@@ -1,13 +1,12 @@
 {
   "dependencies": {
-    "discord.js": "version_désirée",
-    "discord-buttons": "version_désirée",
-    "dotenv": "version_désirée",
-    "quick.db": "version_désirée",
-    "fs": "version_désirée",
-    "ms": "version_désirée",
-    "request": "version_désirée",
-    "discord-logs": "version_désirée"
-    // Ajoutez d'autres dépendances si nécessaire
+    "discord.js": "13.0.0",
+    "discord-buttons": "13.0.0",
+    "dotenv": "13.0.0",
+    "quick.db": "13.0.0",
+    "fs": "13.0.0",
+    "ms": "13.0.0",
+    "request": "13.0.0",
+    "discord-logs": "13.0.0"
   }
 }
