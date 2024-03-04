@@ -20,8 +20,6 @@
     "discord-backup": "^2.5.0",
     "discord-buttons-fixed": "^4.0.0",
     "discord-logs": "^2.0.1",
-    "discord.js": "^12.5.3",
-    "discord.js.old": "^11.6.5",
     "ffmpeg": "0.0.4",
     "ffmpeg-static": "^4.4.0",
     "fs": "0.0.1-security",
@@ -37,7 +35,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "   "
+    "url": "https://github.com/votre_utilisateur/votre_projet.git"
   },
-  "description": ""
+  "description": "Description concise de votre projet"
 }
+
