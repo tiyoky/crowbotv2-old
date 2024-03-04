@@ -36,7 +36,7 @@ async function createPages (interaction, message, embeds, duration, buttonStyle,
 }
 
 async function buttonInteractions (button, interaction)  {
-    if (interaction.interactor !== button.clicker.user || Date.now - interaction.buttonStartTime >= interaction.duration || button.message.id !== interaction.message.id) return;
+    if (interaction.interactor !== button.clicker.user || (Date.now() - interaction.buttonStartTime >= interaction.duration) || button.message.id !== interaction.message.id) return;
     if (button.id == 'next-page') {
         (interaction.currentPage + 1 == interaction.embeds.length ? interaction.currentPage = 0 : interaction.currentPage += 1);
         interaction.message.edit({ embed: interaction.embeds[interaction.currentPage], components: [interaction.components] });
