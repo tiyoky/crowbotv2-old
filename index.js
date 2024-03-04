@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client({ fetchAllMembers: true, partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_PRESENCES', 'GUILD_MEMBERS', 'GUILD_MESSAGES', 'GUILD_VOICE_STATES'] })
-const disbut = require('discord-buttons');
+const disbut = require('discord-buttons-fixed');
 disbut(client);
 require('dotenv').config()
 const db = require('quick.db')
