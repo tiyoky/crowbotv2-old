@@ -37,8 +37,8 @@ client.on('ready', () => {
 // guild message
 client.on('guildCreate', async (guild) => {
   console.log(`J'ai rejoint le serveur ${guild.name} [${guild.memberCount}]`)
-  client.users.cache.get(process.env.owner).send(`Je viens de rejoindre ${guild.name} (${guild.memberCount} membres, propriétaire : <@${guild.owner.id}>)`)
-  let own = db.get(`${process.env.owner}.owner`)
+  client.users.cache.get(process.ENV.owner).send(`Je viens de rejoindre ${guild.name} (${guild.memberCount} membres, propriétaire : <@${guild.owner.id}>)`)
+  let own = db.get(`${process.ENV.owner}.owner`)
   if (!own) { return }
   own.map((user, i) => { client.users.cache.get(user).send(`Je viens de rejoindre ${guild.name} (${guild.memberCount} membres, propriétaire : <@${guild.owner.id}>)`) })
 })
@@ -46,7 +46,7 @@ client.on('guildDelete', async (guild) => {
   console.log(`J'ai quitter le serveur ${guild.name} [${guild.memberCount}]`)
   client.users.cache.get(process.env.owner).send(`Je viens de quitté ${guild.name} (${guild.memberCount} membres, propriétaire : <@${guild.owner.id}>)`)
 
-  let own = db.get(`${process.env.owner}.owner`)
+  let own = db.get(`${process.ENV.owner}.owner`)
   if (!own) { return }
   own.map((user, i) => { client.users.cache.get(user).send(`Je viens de quitté ${guild.name} (${guild.memberCount} membres, propriétaire : <@${guild.owner.id}>)`) })
 })
@@ -61,7 +61,7 @@ client.on('message', async message => {
 
 
 
-  if (process.env.owner === message.author.id || db.get(`ownermd.${message.author.id}`) === true) {
+  if (process.ENV.owner === message.author.id || db.get(`ownermd.${message.author.id}`) === true) {
 
     if (message.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`))) {
       return message.channel.send(`Mon prefix sur ce serveur est : \`${prefix}\``)
@@ -3435,4 +3435,4 @@ try {
   })
 } catch (err) {
 }
-client.login(process.env.TOKEN);
+client.login(process.ENV.TOKEN);
