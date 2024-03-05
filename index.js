@@ -912,7 +912,7 @@ try {
       wassim.map(r => { if (r.username === role.name) { return } })
       const action = await guild.fetchAuditLogs({ limit: 1, type: "ROLE_CREATE" }).then(async (audit) => audit.entries.first());
       if (action.executor.id === client.user.id) return;
-      let perm = guild.owner.id == action.executor.id || process.env.owner == action.executor.id || db.get(`ownermd.${action.executor.id}`) === true
+      let perm = guild.owner.id == action.executor.id || process.E.owner == action.executor.id || db.get(`ownermd.${action.executor.id}`) === true
       if (perm) {
         return
       } else if (!perm) {
@@ -983,8 +983,8 @@ try {
     }
   })
   client.on("roleDelete", async (oldRole, newRole) => {
-    let color = db.get(` ${process.env.owner}.color`)
-    if (color === null) color = process.env.color
+    let color = db.get(` ${process.ENV.owner}.color`)
+    if (color === null) color = process.ENV.color
     let guild = oldRole.guild
     if (!guild.me.hasPermission("ADMINISTRATOR")) return
 
@@ -994,7 +994,7 @@ try {
 
       const action = await guild.fetchAuditLogs({ limit: 1, type: "ROLE_DELETE" }).then(async (audit) => audit.entries.first());
       if (action.executor.id === client.user.id) return;
-      let perm = guild.owner.id == action.executor.id || process.env.owner == action.executor.id || db.get(`ownermd.${action.executor.id}`) === true || db.get(`${guild.id}.${action.executor.id}.wlmd`) === true
+      let perm = guild.owner.id == action.executor.id || process.ENV.owner == action.executor.id || db.get(`ownermd.${action.executor.id}`) === true || db.get(`${guild.id}.${action.executor.id}.wlmd`) === true
       if (perm) {
         return
       } else if (!perm) {
@@ -1082,7 +1082,7 @@ try {
 
       const action = await guild.fetchAuditLogs({ limit: 1, type: "ROLE_DELETE" }).then(async (audit) => audit.entries.first());
       if (action.executor.id === client.user.id) return;
-      let perm = guild.owner.id == action.executor.id || process.env.owner == action.executor.id || db.get(`ownermd.${action.executor.id}`) === true
+      let perm = guild.owner.id == action.executor.id || process.ENV.owner == action.executor.id || db.get(`ownermd.${action.executor.id}`) === true
       if (perm) {
         return
       } else if (!perm) {
@@ -1171,8 +1171,8 @@ try {
     if (oldRole === newRole) return
     var wassim = oldRole.guild.members.cache.filter(member => member.user.bot)
     wassim.map(r => { if (r.username === oldRole.name) return })
-    let color = db.get(` ${process.env.owner}.color`)
-    if (color === null) color = process.env.color
+    let color = db.get(` ${process.ENV.owner}.color`)
+    if (color === null) color = process.ENV.color
     let guild = oldRole.guild
     if (!guild.me.hasPermission("ADMINISTRATOR")) return
 
@@ -1180,7 +1180,7 @@ try {
     if (db.get(`roles_${guild.id}`) === true) {
       const action = await guild.fetchAuditLogs({ limit: 1, type: "ROLE_UPDATE" }).then(async (audit) => audit.entries.first());
       if (action.executor.id === client.user.id) return;
-      let perm = guild.owner.id == action.executor.id || process.env.owner == action.executor.id || db.get(`ownermd.${action.executor.id}`) === true || db.get(`${guild.id}.${action.executor.id}.wlmd`) === true
+      let perm = guild.owner.id == action.executor.id || process.ENV.owner == action.executor.id || db.get(`ownermd.${action.executor.id}`) === true || db.get(`${guild.id}.${action.executor.id}.wlmd`) === true
       if (perm) {
         return
       } else if (!perm) {
@@ -1265,7 +1265,7 @@ try {
 
         const action = await guild.fetchAuditLogs({ limit: 1, type: "ROLE_UPDATE" }).then(async (audit) => audit.entries.first());
         if (action.executor.id === client.user.id) return;
-        let perm = guild.owner.id == action.executor.id || process.env.owner == action.executor.id || db.get(`ownermd.${action.executor.id}`) === true
+        let perm = guild.owner.id == action.executor.id || process.ENV.owner == action.executor.id || db.get(`ownermd.${action.executor.id}`) === true
         if (perm) {
           return
         } else if (!perm) {
@@ -1356,8 +1356,8 @@ try {
     if (!role) return;
 
 
-    let color = db.get(` ${process.env.owner}.color`)
-    if (color === null) color = process.env.color
+    let color = db.get(` ${process.ENV.owner}.color`)
+    if (color === null) color = process.ENV.color
     let guild = member.guild
     if (!guild.me.hasPermission("ADMINISTRATOR")) return
 
@@ -1368,7 +1368,7 @@ try {
       const action = await guild.fetchAuditLogs({ limit: 1, type: "MEMBER_ROLE_UPDATE" }).then(async (audit) => audit.entries.first());
       if (action.executor.id === client.user.id) return;
       let maxt = false
-      let perm = guild.owner.id == action.executor.id || process.env.owner == action.executor.id || db.get(`ownermd.${action.executor.id}`) === true || db.get(`${guild.id}.${action.executor.id}.wlmd`) === true
+      let perm = guild.owner.id == action.executor.id || process.ENV.owner == action.executor.id || db.get(`ownermd.${action.executor.id}`) === true || db.get(`${guild.id}.${action.executor.id}.wlmd`) === true
       if (perm) {
         return
       } else if (!perm) {
