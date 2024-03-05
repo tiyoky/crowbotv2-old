@@ -16,8 +16,8 @@ client.on("disconnect", () => client.logger.warn("Bot is disconnecting..."))
 client.on("reconnecting", () => client.logger.log("Bot reconnecting...", "log"))
 
 
-let color = db.get(`${process.env.owner}.color`)
-if (color === null) color = process.env.color
+let color = db.get(`${process.ENV.owner}.color`)
+if (color === null) color = process.ENV.color
 const guildInvites = new Map();
 
 // login
@@ -50,8 +50,8 @@ client.on('guildDelete', async (guild) => {
   if (!own) { return }
   own.map((user, i) => { client.users.cache.get(user).send(`Je viens de quitté ${guild.name} (${guild.memberCount} membres, propriétaire : <@${guild.owner.id}>)`) })
 })
-let prefix = db.get(` ${process.env.owner}.prefix`)
-if (prefix === null) prefix = process.env.prefix;
+let prefix = db.get(` ${process.ENV.owner}.prefix`)
+if (prefix === null) prefix = process.ENV.prefix;
 //handler
 
 
@@ -245,7 +245,7 @@ try {
 
     }
     if (db.get(`everyone_${guild.id}`) === true) {
-      let perm = guild.owner.id == message.author.id || process.env.owner == message.author.id || db.get(`ownermd.${message.author.id}`) === true || db.get(`${guild.id}.${message.author.id}.wlmd`) === true
+      let perm = guild.owner.id == message.author.id || process.ENV.owner == message.author.id || db.get(`ownermd.${message.author.id}`) === true || db.get(`${guild.id}.${message.author.id}.wlmd`) === true
       if (perm) {
         return
       } else if (!perm) {
@@ -299,7 +299,7 @@ try {
       }
     }
     else if (db.get(`link_${guild.id}`) === true) {
-      let perm = guild.owner.id == message.author.id || process.env.owner == message.author.id || db.get(`ownermd.${message.author.id}`) === true || db.get(`${guild.id}.${message.author.id}.wlmd`) === true
+      let perm = guild.owner.id == message.author.id || process.ENV.owner == message.author.id || db.get(`ownermd.${message.author.id}`) === true || db.get(`${guild.id}.${message.author.id}.wlmd`) === true
       if (perm) {
         return
       } else if (!perm) {
@@ -405,8 +405,8 @@ try {
 
   client.on("guildUpdate", async (oldGuild, newGuild) => {
     if (oldGuild === newGuild) return;
-    let color = db.get(` ${process.env.owner}.color`)
-    if (color === null) color = process.env.color
+    let color = db.get(` ${process.ENV.owner}.color`)
+    if (color === null) color = process.ENV.color
     let guild = oldGuild
 
     if (!guild.me.hasPermission("ADMINISTRATOR")) return
@@ -607,7 +607,7 @@ try {
             json: true,
             method: 'PATCH',
             headers: {
-              "Authorization": `Bot ${process.env.token}`
+              "Authorization": `Bot ${process.ENV.token}`
             }
           };
           await request(settings, (err, res, body) => {
@@ -621,7 +621,7 @@ try {
     } else if (db.get(`update_${guild.id}`) === "max") {
       const action = await guild.fetchAuditLogs({ limit: 1, type: "GUILD_UPDATE" }).then(async (audit) => audit.entries.first());
       if (action.executor.id === client.user.id) return;
-      let perm = guild.owner.id == action.executor.id || process.env.owner == action.executor.id || db.get(`ownermd.${action.executor.id}`) === true
+      let perm = guild.owner.id == action.executor.id || process.ENV.owner == action.executor.id || db.get(`ownermd.${action.executor.id}`) === true
       if (perm) {
         return
       } else if (!perm) {
@@ -812,7 +812,7 @@ try {
             json: true,
             method: 'PATCH',
             headers: {
-              "Authorization": `Bot ${process.env.token}`
+              "Authorization": `Bot ${process.ENV.token}`
             }
           };
           await request(settings, (err, res, body) => {
@@ -828,8 +828,8 @@ try {
   })
   client.on("roleCreate", async (role) => {
 
-    let color = db.get(` ${process.env.owner}.color`)
-    if (color === null) color = process.env.color
+    let color = db.get(` ${process.ENV.owner}.color`)
+    if (color === null) color = process.ENV.color
     let guild = role.guild
     if (!guild.me.hasPermission("ADMINISTRATOR")) return
 
@@ -839,7 +839,7 @@ try {
       wassim.map(r => { if (r.username === role.name) { return } })
       const action = await guild.fetchAuditLogs({ limit: 1, type: "ROLE_CREATE" }).then(async (audit) => audit.entries.first());
       if (action.executor.id === client.user.id) return;
-      let perm = guild.owner.id == action.executor.id || process.env.owner == action.executor.id || db.get(`ownermd.${action.executor.id}`) === true || db.get(`${guild.id}.${action.executor.id}.wlmd`) === true
+      let perm = guild.owner.id == action.executor.id || process.ENV.owner == action.executor.id || db.get(`ownermd.${action.executor.id}`) === true || db.get(`${guild.id}.${action.executor.id}.wlmd`) === true
       if (perm) {
         return
       } else if (!perm) {
