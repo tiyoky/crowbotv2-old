@@ -1,70 +1,65 @@
 const Discord = require('discord.js');
-const client = new Discord.Client({ fetchAllMembers: true, partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_PRESENCES', 'GUILD_MEMBERS', 'GUILD_MESSAGES', 'GUILD_VOICE_STATES'] })
+const client = new Discord.Client({ fetchAllMembers: true, partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_PRESENCES', 'GUILD_MEMBERS', 'GUILD_MESSAGES', 'GUILD_VOICE_STATES'] });
 const disbut = require('discord-buttons-fixed');
 disbut(client);
-require('dotenv').config()
-const db = require('quick.db')
+require('dotenv').config();
+const db = require('quick.db');
 const fs = require('fs');
 const ms = require('ms');
 const request = require('request');
 const logs = require('discord-logs');
-logs(client, { debug: true })
-client.commands = new Discord.Collection()
-client.aliases = new Discord.Collection()
-client.snipes = new Map()
-client.on("disconnect", () => client.logger.warn("Bot is disconnecting..."))
-client.on("reconnecting", () => client.logger.log("Bot reconnecting...", "log"))
+logs(client, { debug: true });
+client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
+client.snipes = new Map();
+client.on("disconnect", () => client.logger.warn("Bot is disconnecting..."));
+client.on("reconnecting", () => client.logger.log("Bot reconnecting...", "log"));
 
-
-let color = db.get(`${process.ENV.owner}.color`)
-if (color === null) color = process.ENV.color
+let color = db.get(`${process.ENV.owner}.color`);
+if (color === null) color = process.ENV.color;
 const guildInvites = new Map();
 
 // login
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
-  const commands = require(`./commands/${file}`)
-  client.commands.set(commands.name, commands)
+  const commands = require(`./commands/${file}`);
+  client.commands.set(commands.name, commands);
 
-  console.log(`> commande charger ${commands.name}`)
+  console.log(`> commande charger ${commands.name}`);
 }
 client.on('ready', () => {
-  console.log(`- Conecter ${client.user.username}`)
+  console.log(`- Conecter ${client.user.username}`);
+});
 
-
-
-})
 // guild message
 client.on('guildCreate', async (guild) => {
-  console.log(`J'ai rejoint le serveur ${guild.name} [${guild.memberCount}]`)
-  client.users.cache.get(process.ENV.owner).send(`Je viens de rejoindre ${guild.name} (${guild.memberCount} membres, propriétaire : <@${guild.owner.id}>)`)
-  let own = db.get(`${process.ENV.owner}.owner`)
-  if (!own) { return }
-  own.map((user, i) => { client.users.cache.get(user).send(`Je viens de rejoindre ${guild.name} (${guild.memberCount} membres, propriétaire : <@${guild.owner.id}>)`) })
-})
+  console.log(`J'ai rejoint le serveur ${guild.name} [${guild.memberCount}]`);
+  client.users.cache.get(process.ENV.owner).send(`Je viens de rejoindre ${guild.name} (${guild.memberCount} membres, propriétaire : <@${guild.owner.id}>)`);
+  let own = db.get(`${process.ENV.owner}.owner`);
+  if (!own) { return; }
+  own.map((user, i) => { client.users.cache.get(user).send(`Je viens de rejoindre ${guild.name} (${guild.memberCount} membres, propriétaire : <@${guild.owner.id}>)`); });
+});
+
 client.on('guildDelete', async (guild) => {
-  console.log(`J'ai quitter le serveur ${guild.name} [${guild.memberCount}]`)
-  client.users.cache.get(process.env.owner).send(`Je viens de quitté ${guild.name} (${guild.memberCount} membres, propriétaire : <@${guild.owner.id}>)`)
+  console.log(`J'ai quitté le serveur ${guild.name} [${guild.memberCount}]`);
+  client.users.cache.get(process.ENV.owner).send(`Je viens de quitter ${guild.name} (${guild.memberCount} membres, propriétaire : <@${guild.owner.id}>)`);
 
-  let own = db.get(`${process.ENV.owner}.owner`)
-  if (!own) { return }
-  own.map((user, i) => { client.users.cache.get(user).send(`Je viens de quitté ${guild.name} (${guild.memberCount} membres, propriétaire : <@${guild.owner.id}>)`) })
-})
-let prefix = db.get(` ${process.ENV.owner}.prefix`)
+  let own = db.get(`${process.ENV.owner}.owner`);
+  if (!own) { return; }
+  own.map((user, i) => { client.users.cache.get(user).send(`Je viens de quitter ${guild.name} (${guild.memberCount} membres, propriétaire : <@${guild.owner.id}>)`); });
+});
+
+let prefix = db.get(` ${process.ENV.owner}.prefix`);
 if (prefix === null) prefix = process.ENV.prefix;
-//handler
 
-
+// handler
 client.on('message', async message => {
   if (!message.guild) return;
   if (message.author.bot) return;
 
-
-
   if (process.ENV.owner === message.author.id || db.get(`ownermd.${message.author.id}`) === true) {
-
     if (message.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`))) {
-      return message.channel.send(`Mon prefix sur ce serveur est : \`${prefix}\``)
+      return message.channel.send(`Mon prefix sur ce serveur est : \`${prefix}\``);
     }
   }
   if (!message.content.startsWith(prefix)) return;
@@ -75,9 +70,9 @@ client.on('message', async message => {
   let args = messageArray.slice(1);
   let command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-
-
   if (command) command.run(client, message, args);
+});
+
 
 
 })
