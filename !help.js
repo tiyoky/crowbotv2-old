@@ -51,12 +51,12 @@ module.exports = {
     name: 'help',
     aliases: [],
     run: async (client, message, args) => {
-let prefix =  db.get(` ${process.env.owner}.prefix`)
-if(prefix === null) prefix = process.env.prefix;
-  let color = db.get(`${process.env.owner}.color`) 
-   if(color === null  ) color = process.env.color
+let prefix =  db.get(` ${process.ENV.owner}.prefix`)
+if(prefix === null) prefix = process.ENV.prefix;
+  let color = db.get(`${process.ENV.owner}.color`) 
+   if(color === null  ) color = process.ENV.color
  
-if(process.env.owner ===message.author.id || db.get(`ownermd.${message.author.id}`) === true || db.get(`${message.guild.id}.${message.author.id}.wlmd`) === true) {
+if(process.ENV.owner ===message.author.id || db.get(`ownermd.${message.author.id}`) === true || db.get(`${message.guild.id}.${message.author.id}.wlmd`) === true) {
        
     const mod = new Discord.MessageEmbed()
     .setTitle('Modération')
